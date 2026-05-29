@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Kantumruy_Pro } from "next/font/google";
+
 import "./globals.css";
+import { Toaster } from "sonner";
+import { AuthGuard } from "@/components/guards/auth-guard";
+import { Loading } from "@/components/customs/loading";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const kantumruy = Kantumruy_Pro({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-kantumruy",
 });
 
 export const metadata: Metadata = {
@@ -23,11 +22,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en">
+      <body
+        className={kantumruy.className}
+      >
+        {/* <AuthGuard> */}
+          {children}
+          <Loading />
+        {/* </AuthGuard> */}
+
+        <Toaster
+          richColors
+          position="top-right"
+        />
+      </body>
     </html>
   );
 }
