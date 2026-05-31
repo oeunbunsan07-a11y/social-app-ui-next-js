@@ -16,6 +16,7 @@ export const cookieStorage = {
     Cookies.set(REFRESH_TOKEN, value, {
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
+      expires: 7, // Refresh token expires in 7 days
     });
   },
 
